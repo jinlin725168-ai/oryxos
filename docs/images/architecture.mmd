@@ -1,0 +1,78 @@
+flowchart TB
+%% OryxOS 整体架构 —— 逻辑源（single source of truth）
+%% 对应 docs/architecture.svg（手绘标准版），二者 node-set / edge-set 等价
+%% 读法：三触发源汇入 AgentService → ReAct 引擎调度三块能力 → 落 SQLite + 文件系统 → 外接 LLM/MCP
+%% 边：实线 --> 运行时数据流；虚线 -.-> 外部依赖；~~~ 仅布局锁层，非关系
+%% 配色：接入=蓝 引擎=橙 能力=橙 存储=绿 外部=深灰
+
+  subgraph L1["接入层 Access · 三触发源"]
+    direction LR
+    CLI["CLI Channel · 人推<br/>oryxos chat 交互对话"]
+    WEB["Web Service · 人推<br/>REST API 业务系统集成"]
+    SCH["AgentScheduler · 钟推<br/>cron 到点自动触发"]
+  end
+
+  SVC["AgentService · 统一入口<br/>三触发源汇入同一条链路，引擎不感知来源"]
+
+  subgraph L3["引擎层 Engine · Agent 大脑"]
+    direction LR
+    RE["ReActLoop<br/>Reason+Act 循环 · 迭代调度"]
+    PB["PromptBuilder<br/>组装 系统提示+记忆+历史+工具"]
+    TE["ToolExecutor<br/>Sandbox 校验 · 执行 · 写审计"]
+  end
+
+  subgraph L4["能力层 Capabilities"]
+    direction LR
+    PROV["Provider · 能力一<br/>LLM 调用 · provider-name 显式映射"]
+    MEM["Memory · 能力三<br/>会话+长期(MEMORY.md) 三层门面"]
+    TOOL["Tool · 能力四<br/>内置 9 个 + MCP · ToolRegistry"]
+  end
+
+  subgraph L5["基础层 Storage"]
+    direction LR
+    DB[("SQLite<br/>sessions · tool_invocations · llm_calls")]
+    FS[("文件系统<br/>agents/ · MEMORY.md · Bootstrap")]
+  end
+
+  subgraph L6["外部依赖 External"]
+    direction LR
+    LLM["各家 LLM API<br/>DeepSeek · 通义 · Kimi · Anthropic ..."]
+    MCP["外部 MCP Server<br/>企业系统 · 社区工具"]
+  end
+
+  CLI --> SVC
+  WEB --> SVC
+  SCH --> SVC
+  SVC --> RE
+  RE --> PB
+  RE --> TE
+  RE --> PROV
+  PB --> MEM
+  TE --> TOOL
+  PROV --> DB
+  MEM --> DB
+  MEM --> FS
+  TOOL --> DB
+  PROV -.->|"调用"| LLM
+  TOOL -.->|"JSON-RPC"| MCP
+
+  %% 不可视链接：仅锁定层级顺序，非业务关系
+  SCH ~~~ SVC
+  SVC ~~~ RE
+  RE ~~~ PROV
+  PROV ~~~ DB
+  DB ~~~ LLM
+
+  classDef access fill:#eff6ff,stroke:#3b82f6,color:#0f172a;
+  classDef entry fill:#fef3c7,stroke:#b45309,color:#0f172a;
+  classDef engine fill:#fff7ed,stroke:#f97316,color:#0f172a;
+  classDef cap fill:#fff7ed,stroke:#f97316,color:#0f172a;
+  classDef store fill:#ecfdf5,stroke:#10b981,color:#0f172a;
+  classDef ext fill:#1e293b,stroke:#475569,color:#ffffff;
+
+  class CLI,WEB,SCH access;
+  class SVC entry;
+  class RE,PB,TE engine;
+  class PROV,MEM,TOOL cap;
+  class DB,FS store;
+  class LLM,MCP ext;

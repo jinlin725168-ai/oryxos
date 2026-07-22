@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152 32" width="152" height="32" font-family="'Space Grotesk','Inter',sans-serif">
+  <!-- OryxOS 字标：羚羊长角头部标记 + 文字（Oryx 深色 · OS 主色） -->
+  <g transform="translate(1 1.5)">
+    <g fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.4 17.5 C 12 12, 11 8, 10.6 3.8"/>
+      <path d="M18.6 17.5 C 20 12, 21 8, 21.4 3.8"/>
+      <path d="M13.4 17.8 C 12.9 23, 16 27, 16 27 C 16 27, 19.1 23, 18.6 17.8"/>
+    </g>
+    <circle cx="14.1" cy="20.4" r="0.85" fill="#ea580c"/>
+    <circle cx="17.9" cy="20.4" r="0.85" fill="#ea580c"/>
+    <circle cx="16" cy="24.2" r="0.9" fill="#ea580c"/>
+  </g>
+  <text x="38" y="23" font-size="21" font-weight="700" letter-spacing="-0.5" fill="#0f172a">Oryx<tspan fill="#ea580c">OS</tspan></text>
+</svg>
