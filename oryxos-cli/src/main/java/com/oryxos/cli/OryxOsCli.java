@@ -43,7 +43,7 @@ public class OryxOsCli implements Runnable {
                 """.formatted(
                 VERSION,
                 System.getProperty("java.version"),
-                "https://github.com/oryxos-jin/oryxos");
+                "https://github.com/jinlin725168-ai/oryxos");
     }
 
     /** 供 `oryxos --version` 使用（技术方案 §8.7）。 */

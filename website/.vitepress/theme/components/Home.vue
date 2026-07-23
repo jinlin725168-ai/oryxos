@@ -162,7 +162,7 @@ const tiers = computed(() => [
           <a class="oryx-btn-ghost" :href="`${docBase}/architecture`">
             {{ t('架构', 'Architecture') }}
           </a>
-          <a class="oryx-btn-ghost" href="https://github.com/oryxos-jin/oryxos" target="_blank" rel="noopener">
+          <a class="oryx-btn-ghost" href="https://github.com/jinlin725168-ai/oryxos" target="_blank" rel="noopener">
             GitHub
           </a>
         </div>
@@ -337,7 +337,7 @@ oryxos chat --message "Hi, introduce yourself"
 oryxos serve   # http://localhost:8080</code></pre>
           <div class="oryx-cta-links">
             <a class="oryx-btn-primary" :href="`${docBase}/quick-start`">{{ t('查看文档', 'Read the Docs') }}</a>
-            <a class="oryx-btn-ghost" href="https://github.com/oryxos-jin/oryxos" target="_blank" rel="noopener">GitHub</a>
+            <a class="oryx-btn-ghost" href="https://github.com/jinlin725168-ai/oryxos" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
       </div>

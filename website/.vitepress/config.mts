@@ -1,9 +1,9 @@
 import { defineConfig } from 'vitepress'
 
-const GITHUB = 'https://github.com/oryxos-jin/oryxos'
+const GITHUB = 'https://github.com/jinlin725168-ai/oryxos'
 // GitHub Pages 项目页：默认域名带 /oryxos/ 子路径。
 // 若将来绑自有域名，把 SITE_ORIGIN 改成 https://你的域名，并把下面 base 改回 '/'。
-const SITE_ORIGIN = 'https://oryxos-jin.github.io'
+const SITE_ORIGIN = 'https://jinlin725168-ai.github.io'
 const SITE_URL = SITE_ORIGIN + '/oryxos/'
 
 export default defineConfig({
