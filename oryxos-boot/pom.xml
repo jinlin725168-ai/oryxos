@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.oryxos</groupId>
+    <artifactId>oryxos-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>oryxos-boot</artifactId>
+  <name>oryxos-boot</name>
+  <description>Spring Boot 启动模块：主类、自动配置、依赖聚合，产出单个可执行 fat JAR</description>
+
+  <dependencies>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-core</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-provider</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-memory</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-tool</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-channel-cli</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-web</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-storage</artifactId></dependency>
+    <dependency><groupId>com.oryxos</groupId><artifactId>oryxos-cli</artifactId></dependency>
+  </dependencies>
+
+  <build>
+    <finalName>oryxos</finalName>
+    <plugins>
+      <!-- 只有 boot 模块执行 repackage，产出可执行 fat JAR；其余模块产出普通 jar -->
+      <plugin>
+        <!-- 父 POM(spring-boot-starter-parent) 已默认绑定 repackage 执行，无需再声明 executions。 -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.oryxos.boot.OryxOsApplication</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
