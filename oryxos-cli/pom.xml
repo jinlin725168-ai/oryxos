@@ -28,4 +28,20 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <finalName>oryxos-cli</finalName>
+    <plugins>
+      <!-- 额外产出一个可执行 jar：oryxos-cli-exec.jar（classifier=exec）。
+           主构件仍是普通 jar，供 oryxos-boot 作为依赖引用；exec 分类件用于 `java -jar` 直接运行。 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.oryxos.cli.OryxOsCli</mainClass>
+          <classifier>exec</classifier>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
