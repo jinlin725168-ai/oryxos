@@ -1,14 +1,16 @@
 import { defineConfig } from 'vitepress'
 
-// ⚠️ 占位项（部署前替换）：GitHub 仓库地址、站点域名。
 const GITHUB = 'https://github.com/oryxos-jin/oryxos'
-const HOSTNAME = 'https://oryxos.dev'
+// GitHub Pages 项目页：默认域名带 /oryxos/ 子路径。
+// 若将来绑自有域名，把 SITE_ORIGIN 改成 https://你的域名，并把下面 base 改回 '/'。
+const SITE_ORIGIN = 'https://oryxos-jin.github.io'
+const SITE_URL = SITE_ORIGIN + '/oryxos/'
 
 export default defineConfig({
   title: 'OryxOS',
   titleTemplate: ':title — OryxOS',
   description: '企业级 Java 原生 Agent OS —— 私有、可控、可审计的智能体统一底座。',
-  base: '/',
+  base: '/oryxos/',
   cleanUrls: true,
   appearance: 'force-light',
 
@@ -24,9 +26,9 @@ export default defineConfig({
     ['meta', { property: 'og:site_name', content: 'OryxOS' }],
     ['meta', { property: 'og:title', content: 'OryxOS — 企业级 Java 原生 Agent OS' }],
     ['meta', { property: 'og:description', content: '私有、可控、可审计的智能体统一底座，装在你自己的基础设施上。' }],
-    ['meta', { property: 'og:url', content: HOSTNAME }],
+    ['meta', { property: 'og:url', content: SITE_URL }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['link', { rel: 'canonical', href: HOSTNAME }],
+    ['link', { rel: 'canonical', href: SITE_URL }],
   ],
 
   locales: {
@@ -69,7 +71,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: GITHUB }],
   },
 
-  sitemap: { hostname: HOSTNAME },
+  sitemap: { hostname: SITE_ORIGIN },
 })
 
 function enSidebar() {
