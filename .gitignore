@@ -8,3 +8,7 @@ website/.vitepress/cache/
 target/
 *.class
 
+
+# Python
+__pycache__/
+*.pyc
